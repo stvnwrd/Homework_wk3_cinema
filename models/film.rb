@@ -42,6 +42,12 @@ class Film
     return results.map { |customer| Customer.new(customer)  }
   end
 
+  def customers_total()
+    sql = "SELECT count(*) AS TOTAL FROM tickets WHERE film_id = $1"
+    values = [@id]
+    result = SqlRunner.run(sql, values)
+    return result.first
+  end
 
 
   def self.find(search)
